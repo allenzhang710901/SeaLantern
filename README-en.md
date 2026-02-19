@@ -86,6 +86,8 @@ Then deploy the `dist/` folder.
 
 ### Online Demo (Web)
 
+If you want a single-file page for any static hosting (without Node build), use `hosting/index.html` in this repo (self-contained intro page with built-in styles and effects).
+
 If you only want to try the UI online (without running Tauri locally):
 
 ```bash
