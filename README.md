@@ -93,6 +93,14 @@ npm run build
 
 将 `dist/` 部署到 Vercel / Netlify 即可。
 
+也可以直接用 GitHub Pages 自动部署：
+
+1. 在 GitHub 仓库 `Settings -> Pages` 中将 Source 设为 `GitHub Actions`。
+2. 推送到 `main` 分支（或手动触发 `Deploy Web Demo to GitHub Pages` 工作流）。
+3. 访问 `https://<你的用户名>.github.io/<仓库名>/`。
+
+> 该仓库已内置 `.github/workflows/pages.yml`，会自动执行 `npm ci` 和 `npm run build -- --base "/<repo>/"` 后发布。
+
 > 注意：Web 版为演示模式，不支持本地文件选择、启动服务器、系统托盘等桌面能力。
 
 一键执行前端核心检查（Lint、类型与构建）：

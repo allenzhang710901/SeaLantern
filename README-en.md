@@ -95,6 +95,14 @@ npm run build
 
 Deploy the `dist/` folder to Vercel / Netlify.
 
+You can also deploy directly with GitHub Pages:
+
+1. In your GitHub repo, go to `Settings -> Pages` and set Source to `GitHub Actions`.
+2. Push to `main` (or manually run the `Deploy Web Demo to GitHub Pages` workflow).
+3. Open `https://<your-user>.github.io/<repo>/`.
+
+> This repository already includes `.github/workflows/pages.yml`, which runs `npm ci` and `npm run build -- --base "/<repo>/"` before publishing.
+
 > Note: the Web build is a demo mode and does not support desktop-only features (local file picker, launching servers, system tray, etc.).
 
 Run the core frontend quality pipeline (lint, type check, and build) in one command:
