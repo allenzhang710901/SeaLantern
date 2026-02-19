@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import AppLayout from "./components/layout/AppLayout.vue";
+import WebIntroView from "./views/WebIntroView.vue";
 import SplashScreen from "./components/splash/SplashScreen.vue";
 import UpdateModal from "./components/common/UpdateModal.vue";
 import { useUpdateStore } from "./stores/updateStore";
 import { useSettingsStore } from "./stores/settingsStore";
 import { useI18nStore } from "./stores/i18nStore";
+import { isWebDemoMode } from "./api/tauri";
 
 const showSplash = ref(true);
 const isInitializing = ref(true);
@@ -82,7 +84,8 @@ function handleUpdateModalClose() {
   </transition>
 
   <template v-if="!showSplash">
-    <AppLayout />
+    <WebIntroView v-if="isWebDemoMode" />
+    <AppLayout v-else />
 
     <UpdateModal
       v-if="updateStore.isUpdateModalVisible && updateStore.isUpdateAvailable"
