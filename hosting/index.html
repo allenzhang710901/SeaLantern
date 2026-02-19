@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sea Lantern Web Intro</title>
+    <style>
+      :root { --g1:#34d399; --g2:#3b82f6; --wave-speed:16s; }
+      * { box-sizing: border-box; }
+      body { margin:0; min-height:100vh; display:grid; place-items:center; background:#071022; color:#e5f2ff; font-family:Inter,"PingFang SC","Microsoft YaHei",sans-serif; }
+      .hero { position:relative; width:min(980px,92vw); border:1px solid rgba(255,255,255,.2); border-radius:20px; padding:28px; overflow:hidden; backdrop-filter:blur(8px); }
+      .water-bg { position:absolute; inset:-40%; z-index:-1; background:radial-gradient(circle at 20% 30%,var(--g1),transparent 40%),radial-gradient(circle at 80% 70%,var(--g2),transparent 45%),linear-gradient(120deg,rgba(255,255,255,.12),rgba(255,255,255,.02)); animation:flow var(--wave-speed) linear infinite; }
+      @keyframes flow{0%{transform:translate3d(-3%,-2%,0) rotate(0)}50%{transform:translate3d(3%,2%,0) rotate(180deg)}100%{transform:translate3d(-3%,-2%,0) rotate(360deg)}}
+      h1{margin:0}.subtitle{opacity:.9;margin-top:8px}.actions{display:flex;gap:10px;margin:14px 0;flex-wrap:wrap}
+      .btn{border:1px solid rgba(255,255,255,.35);border-radius:10px;padding:8px 12px;color:#fff;text-decoration:none;background:rgba(10,18,28,.35)}
+      .btn.primary{background:rgba(52,211,153,.25)}
+      .features{margin:0 0 16px;padding-left:18px;line-height:1.7}
+      .customizer{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px;align-items:center;font-size:13px}
+      .customizer input[type="color"],.customizer select,.customizer input[type="range"]{width:100%}
+      .ripple{position:absolute;width:14px;height:14px;border-radius:999px;border:1px solid rgba(255,255,255,.8);transform:translate(-50%,-50%);animation:ripple .9s ease-out forwards;pointer-events:none}
+      @keyframes ripple{from{opacity:.8;transform:translate(-50%,-50%) scale(.2)}to{opacity:0;transform:translate(-50%,-50%) scale(9)}}
+      .sticker{position:absolute;transform:translate(-50%,-50%);font-size:22px;pointer-events:none}
+      @media(max-width:900px){.customizer{grid-template-columns:1fr 1fr}}
+    </style>
+  </head>
+  <body>
+    <section class="hero" id="hero">
+      <div class="water-bg"></div>
+      <h1>Sea Lantern</h1>
+      <p class="subtitle">Web 版介绍页（可直接上传到任意静态 Hosting）</p>
+      <p>👤 创作者：allenzhang710901</p>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/FPSZ/SeaLantern/releases" target="_blank" rel="noreferrer">点击下载</a>
+        <a class="btn" href="https://github.com/FPSZ/SeaLantern" target="_blank" rel="noreferrer">GitHub</a>
+      </div>
+      <ul class="features">
+        <li>✅ 服务端管理 / 控制台 / 配置编辑</li>
+        <li>✅ Mods / Plugins 搜索与安装</li>
+        <li>✅ 多语言与个性化设置</li>
+        <li>✅ 动态背景 + 涟漪 + 小贴图自定义</li>
+      </ul>
+      <div class="customizer">
+        <label>渐变 A <input id="g1" type="color" value="#34d399" /></label>
+        <label>渐变 B <input id="g2" type="color" value="#3b82f6" /></label>
+        <label>波动速度 <input id="speed" type="range" min="6" max="30" value="16" /></label>
+        <label>贴图<select id="sticker"><option>✨</option><option>🌊</option><option>🧭</option><option>🪼</option><option>🐟</option></select></label>
+        <button id="clear" class="btn" type="button">清空贴图</button>
+      </div>
+    </section>
+    <script>
+      const hero=document.getElementById('hero');
+      const g1=document.getElementById('g1');
+      const g2=document.getElementById('g2');
+      const speed=document.getElementById('speed');
+      const sticker=document.getElementById('sticker');
+      const clear=document.getElementById('clear');
+      g1.addEventListener('input',()=>document.documentElement.style.setProperty('--g1',g1.value));
+      g2.addEventListener('input',()=>document.documentElement.style.setProperty('--g2',g2.value));
+      speed.addEventListener('input',()=>document.documentElement.style.setProperty('--wave-speed',`${speed.value}s`));
+      hero.addEventListener('mousemove',(event)=>{const rect=hero.getBoundingClientRect();const ripple=document.createElement('span');ripple.className='ripple';ripple.style.left=`${event.clientX-rect.left}px`;ripple.style.top=`${event.clientY-rect.top}px`;hero.appendChild(ripple);setTimeout(()=>ripple.remove(),900);});
+      hero.addEventListener('click',(event)=>{if(event.target.closest('button, input, select, a'))return;const rect=hero.getBoundingClientRect();const el=document.createElement('span');el.className='sticker';el.textContent=sticker.value;el.style.left=`${event.clientX-rect.left}px`;el.style.top=`${event.clientY-rect.top}px`;hero.appendChild(el);});
+      clear.addEventListener('click',()=>hero.querySelectorAll('.sticker').forEach((el)=>el.remove()));
+    </script>
+  </body>
+</html>
