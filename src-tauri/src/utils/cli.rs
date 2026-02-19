@@ -139,7 +139,7 @@ fn search_mods(query: &str, version: &str, loader: &str) {
     rt.block_on(async {
         let mod_manager = global::mod_manager();
         match mod_manager
-            .search_modrinth(query, version, loader, 1, 10)
+            .search_modrinth(query, version, loader, "mod", 1, 10)
             .await
         {
             Ok(result) => {
