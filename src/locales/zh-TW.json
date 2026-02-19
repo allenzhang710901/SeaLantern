@@ -451,6 +451,10 @@
     "downloads": "下載：",
     "prev_page": "上一頁",
     "next_page": "下一頁",
-    "result_range": "顯示 {{start}}-{{end}} / 共 {{total}} 筆"
+    "result_range": "顯示 {{start}}-{{end}} / 共 {{total}} 筆",
+    "install_with_dependencies_success": "已安裝（含前置）：{{name}}",
+    "project_type": "類型",
+    "project_type_mod": "模組",
+    "project_type_plugin": "插件（Paper）"
   }
 }

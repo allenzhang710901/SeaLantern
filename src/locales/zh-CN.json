@@ -446,6 +446,10 @@
     "downloads": "下载：",
     "prev_page": "上一页",
     "next_page": "下一页",
-    "result_range": "显示 {{start}}-{{end}} / 共 {{total}} 条"
+    "result_range": "显示 {{start}}-{{end}} / 共 {{total}} 条",
+    "install_with_dependencies_success": "已安装（含前置）：{{name}}",
+    "project_type": "类型",
+    "project_type_mod": "模组",
+    "project_type_plugin": "插件（Paper）"
   }
 }

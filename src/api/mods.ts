@@ -1,6 +1,7 @@
 import { tauriInvoke } from "./tauri";
 
-export type ModLoader = "fabric" | "forge" | "quilt" | "neoforge";
+export type ModLoader = "fabric" | "forge" | "quilt" | "neoforge" | "paper";
+export type ModProjectType = "mod" | "plugin";
 
 export interface ModInfo {
   id: string;
@@ -25,6 +26,7 @@ export const modsApi = {
     query: string;
     gameVersion: string;
     loader: ModLoader;
+    projectType: ModProjectType;
     page: number;
     pageSize: number;
   }): Promise<SearchModsResult> {
@@ -32,6 +34,7 @@ export const modsApi = {
       query: params.query,
       gameVersion: params.gameVersion,
       loader: params.loader,
+      projectType: params.projectType,
       page: params.page,
       pageSize: params.pageSize,
     });
@@ -41,11 +44,17 @@ export const modsApi = {
     serverId: string;
     downloadUrl: string;
     fileName: string;
+    projectId?: string;
+    gameVersion?: string;
+    loader?: ModLoader;
   }): Promise<void> {
     return tauriInvoke("install_mod", {
       serverId: params.serverId,
       downloadUrl: params.downloadUrl,
       fileName: params.fileName,
+      projectId: params.projectId,
+      gameVersion: params.gameVersion,
+      loader: params.loader,
     });
   },
 };

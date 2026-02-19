@@ -94,6 +94,7 @@ async function mockInvoke<T>(command: string, args?: Record<string, unknown>): P
       return [] as T;
     case "search_mods": {
       const q = String(args?.query ?? "").trim().toLowerCase();
+      const projectType = String(args?.projectType ?? "mod").toLowerCase();
       const page = Number(args?.page ?? 1);
       const pageSize = Number(args?.pageSize ?? 10);
       const safePage = Number.isFinite(page) && page > 0 ? page : 1;
@@ -138,11 +139,22 @@ async function mockInvoke<T>(command: string, args?: Record<string, unknown>): P
           source: "modrinth",
           downloads: 7700000,
         },
+        {
+          id: "demo-essentialsx",
+          name: "EssentialsX (Demo)",
+          summary: "Classic Paper/Spigot plugin for server utilities.",
+          download_url: "https://example.com/essentialsx.jar",
+          file_name: "essentialsx-demo.jar",
+          source: "modrinth",
+          downloads: 5400000,
+          project_type: "plugin",
+        },
       ];
 
+      const typed = all.filter((item) => (item.project_type ?? "mod") === projectType);
       const filtered = !q
-        ? all
-        : all.filter((item) => item.name.toLowerCase().includes(q) || item.summary.toLowerCase().includes(q));
+        ? typed
+        : typed.filter((item) => item.name.toLowerCase().includes(q) || item.summary.toLowerCase().includes(q));
       const total = filtered.length;
       const offset = (safePage - 1) * safePageSize;
       const items = filtered.slice(offset, offset + safePageSize);

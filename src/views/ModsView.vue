@@ -5,7 +5,7 @@ import SLCard from "../components/common/SLCard.vue";
 import SLInput from "../components/common/SLInput.vue";
 import SLButton from "../components/common/SLButton.vue";
 import SLSelect from "../components/common/SLSelect.vue";
-import { modsApi, type ModInfo, type ModLoader } from "../api/mods";
+import { modsApi, type ModInfo, type ModLoader, type ModProjectType } from "../api/mods";
 import { useServerStore } from "../stores/serverStore";
 import { i18n } from "../locales";
 
@@ -14,6 +14,7 @@ const serverStore = useServerStore();
 
 const query = ref("");
 const gameVersion = ref("1.20.1");
+const projectType = ref<ModProjectType>("mod");
 const loader = ref<ModLoader>("fabric");
 const loading = ref(false);
 const error = ref<string | null>(null);
@@ -32,12 +33,21 @@ const totalPages = computed(() => Math.max(1, Math.ceil(total.value / Number(pag
 const pageStart = computed(() => (total.value === 0 ? 0 : (currentPage.value - 1) * Number(pageSize.value) + 1));
 const pageEnd = computed(() => Math.min(currentPage.value * Number(pageSize.value), total.value));
 
-const loaderOptions = [
-  { label: "Fabric", value: "fabric" },
-  { label: "Forge", value: "forge" },
-  { label: "Quilt", value: "quilt" },
-  { label: "NeoForge", value: "neoforge" },
+const projectTypeOptions = [
+  { label: i18n.t("mods.project_type_mod"), value: "mod" },
+  { label: i18n.t("mods.project_type_plugin"), value: "plugin" },
 ];
+
+const loaderOptions = computed(() =>
+  projectType.value === "plugin"
+    ? [{ label: "Paper", value: "paper" }]
+    : [
+        { label: "Fabric", value: "fabric" },
+        { label: "Forge", value: "forge" },
+        { label: "Quilt", value: "quilt" },
+        { label: "NeoForge", value: "neoforge" },
+      ],
+);
 
 const pageSizeOptions = [
   { label: "10", value: "10" },
@@ -74,6 +84,14 @@ onMounted(async () => {
 });
 
 
+watch(projectType, async (nextType) => {
+  loader.value = nextType === "plugin" ? "paper" : "fabric";
+  if (!query.value.trim()) {
+    return;
+  }
+  await searchMods(1);
+});
+
 watch(pageSize, async () => {
   if (!query.value.trim()) {
     return;
@@ -96,6 +114,7 @@ async function searchMods(page = 1) {
       query: query.value.trim(),
       gameVersion: gameVersion.value.trim(),
       loader: loader.value,
+      projectType: projectType.value,
       page,
       pageSize: Number(pageSize.value),
     });
@@ -132,9 +151,12 @@ async function installMod(mod: ModInfo) {
       serverId: selectedServerId.value,
       downloadUrl: mod.download_url,
       fileName: mod.file_name,
+      projectId: mod.id,
+      gameVersion: gameVersion.value.trim(),
+      loader: loader.value,
     });
 
-    successMessage.value = i18n.t("mods.install_success", { name: mod.name });
+    successMessage.value = i18n.t("mods.install_with_dependencies_success", { name: mod.name });
   } catch (e) {
     error.value = e instanceof Error ? e.message : String(e);
   } finally {
@@ -149,6 +171,12 @@ async function installMod(mod: ModInfo) {
       <div class="search-grid">
         <SLInput v-model="query" :label="i18n.t('mods.keyword')" :placeholder="i18n.t('mods.keyword_placeholder')" />
         <SLInput v-model="gameVersion" :label="i18n.t('mods.game_version')" placeholder="1.20.1" />
+        <SLSelect
+          v-model="projectType"
+          :label="i18n.t('mods.project_type')"
+          :options="projectTypeOptions"
+          maxHeight="220px"
+        />
         <SLSelect
           v-model="loader"
           :label="i18n.t('mods.loader')"
@@ -225,7 +253,7 @@ async function installMod(mod: ModInfo) {
 
 .search-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
 }
 

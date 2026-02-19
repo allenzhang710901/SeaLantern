@@ -138,7 +138,10 @@ fn search_mods(query: &str, version: &str, loader: &str) {
     let rt = tokio::runtime::Runtime::new().unwrap();
     rt.block_on(async {
         let mod_manager = global::mod_manager();
-        match mod_manager.search_modrinth(query, version, loader, 1, 10).await {
+        match mod_manager
+            .search_modrinth(query, version, loader, 1, 10)
+            .await
+        {
             Ok(result) => {
                 if result.items.is_empty() {
                     println!("未找到匹配的模组。");

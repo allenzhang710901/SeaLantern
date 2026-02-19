@@ -451,6 +451,10 @@
     "downloads": "Downloads:",
     "prev_page": "Prev",
     "next_page": "Next",
-    "result_range": "Showing {{start}}-{{end}} of {{total}}"
+    "result_range": "Showing {{start}}-{{end}} of {{total}}",
+    "install_with_dependencies_success": "Installed with required dependencies: {{name}}",
+    "project_type": "Type",
+    "project_type_mod": "Mod",
+    "project_type_plugin": "Plugin (Paper)"
   }
 }
