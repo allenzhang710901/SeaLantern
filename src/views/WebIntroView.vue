@@ -68,8 +68,14 @@ function clearStickers() {
       <div class="water-bg" />
 
       <header class="hero-header">
-        <h1>Sea Lantern</h1>
+        <h1 class="hero-title">Sea Lantern</h1>
         <p class="subtitle">更现代、更流畅的 Minecraft 服务器管理体验</p>
+        <div class="hero-tags"><span>桌面应用</span><span>Web 预览</span><span>开源项目</span></div>
+        <div class="hero-metrics">
+          <div class="metric"><strong>10+</strong><span>核心功能模块</span></div>
+          <div class="metric"><strong>3</strong><span>分钟快速上手</span></div>
+          <div class="metric"><strong>100%</strong><span>本地自主管理</span></div>
+        </div>
         <p class="desc">
           Web 版当前以介绍与预览为主；完整能力（本地文件、进程管理、系统托盘等）请下载桌面端。
         </p>
@@ -83,7 +89,7 @@ function clearStickers() {
 
       <section class="content-grid">
         <article class="panel">
-          <h3>功能介绍</h3>
+          <h3>✨ 功能介绍</h3>
           <ul>
             <li>服务器创建、导入、启停与状态监控</li>
             <li>控制台实时日志和命令管理</li>
@@ -93,15 +99,15 @@ function clearStickers() {
         </article>
 
         <article class="panel">
-          <h3>快速教程</h3>
-          <ol>
+          <h3>🚀 快速教程</h3>
+          <ol class="timeline">
             <li v-for="step in tutorialSteps" :key="step">{{ step }}</li>
           </ol>
         </article>
       </section>
 
       <section class="gallery">
-        <h3>界面照片</h3>
+        <h3>🖼️ 界面照片</h3>
         <div class="gallery-grid">
           <figure v-for="shot in screenshots" :key="shot" class="gallery-item">
             <img :src="shot" alt="Sea Lantern screenshot" loading="lazy" />
@@ -110,7 +116,7 @@ function clearStickers() {
       </section>
 
       <section class="customizer">
-        <h3>外观自定义</h3>
+        <h3>🎨 外观自定义</h3>
         <div class="customizer-controls">
           <label>渐变色 A <input v-model="gradientA" type="color" /></label>
           <label>渐变色 B <input v-model="gradientB" type="color" /></label>
@@ -142,21 +148,25 @@ function clearStickers() {
   width: 100%;
   height: 100%;
   overflow: auto;
-  padding: 24px 0;
-  background: #071022;
+  padding: 28px 0;
+  background:
+    radial-gradient(circle at 15% 12%, rgba(59, 130, 246, 0.18), transparent 26%),
+    radial-gradient(circle at 85% 88%, rgba(16, 185, 129, 0.12), transparent 24%),
+    #071022;
   color: #e5f2ff;
 }
 
 .hero {
   position: relative;
-  width: min(1100px, 94vw);
+  width: min(1120px, 94vw);
   margin: 0 auto;
-  border: 1px solid rgba(147, 197, 253, 0.35);
-  border-radius: 20px;
-  padding: 28px;
+  border: 1px solid rgba(147, 197, 253, 0.44);
+  border-radius: 24px;
+  padding: 34px;
   overflow: hidden;
-  backdrop-filter: blur(8px);
-  box-shadow: 0 24px 80px rgba(2, 6, 23, 0.45);
+  backdrop-filter: blur(10px);
+  background: linear-gradient(180deg, rgba(10, 20, 36, 0.76), rgba(6, 13, 24, 0.58));
+  box-shadow: 0 28px 90px rgba(2, 6, 23, 0.5);
 }
 
 .water-bg {
@@ -175,37 +185,78 @@ function clearStickers() {
   100% { transform: translate3d(-3%, -2%, 0) rotate(360deg); }
 }
 
-.hero-header h1 { margin: 0; }
-.hero-header h1 {
-  font-size: clamp(32px, 4vw, 52px);
-  letter-spacing: 0.5px;
+.hero-title {
+  margin: 0;
+  font-size: clamp(36px, 4.2vw, 56px);
+  letter-spacing: 0.6px;
+  text-shadow: 0 4px 22px rgba(56, 189, 248, 0.28);
 }
-.subtitle { margin: 8px 0 0; opacity: 0.92; }
+.subtitle { margin: 10px 0 0; opacity: 0.95; }
+.hero-tags {
+  margin-top: 12px;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.hero-tags span {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(147, 197, 253, 0.45);
+  background: rgba(30, 58, 95, 0.45);
+}
 .desc { margin-top: 10px; color: #c4d8f2; }
 .meta { margin-top: 8px; }
 
-.actions { margin: 16px 0; display: flex; gap: 10px; flex-wrap: wrap; }
+.hero-metrics {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  background: rgba(11, 27, 47, 0.45);
+}
+
+.metric strong {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.metric span {
+  font-size: 12px;
+  color: #bfdbfe;
+}
+
+.actions { margin: 20px 0; display: flex; gap: 12px; flex-wrap: wrap; }
 .btn {
   border: 1px solid rgba(255, 255, 255, 0.35);
-  border-radius: 10px;
-  padding: 8px 12px;
+  border-radius: 12px;
+  padding: 10px 14px;
   color: #fff;
   text-decoration: none;
   background: rgba(10, 18, 28, 0.35);
 }
-.btn.primary { background: rgba(52, 211, 153, 0.25); }
+.btn.primary { background: linear-gradient(135deg, rgba(52, 211, 153, 0.38), rgba(59, 130, 246, 0.38)); }
 
 .content-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 12px;
+  gap: 14px;
 }
 
 .panel {
   border: 1px solid rgba(147, 197, 253, 0.28);
-  border-radius: 12px;
-  padding: 14px;
-  background: linear-gradient(180deg, rgba(10, 21, 38, 0.72), rgba(9, 16, 28, 0.45));
+  border-radius: 14px;
+  padding: 16px;
+  background: linear-gradient(180deg, rgba(13, 31, 55, 0.72), rgba(8, 16, 29, 0.46));
 }
 
 .panel h3,
@@ -221,20 +272,55 @@ function clearStickers() {
   line-height: 1.8;
 }
 
+.timeline {
+  list-style: none;
+  padding-left: 0 !important;
+}
+
+.timeline li {
+  position: relative;
+  padding: 8px 0 8px 20px;
+}
+
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #34d399, #38bdf8);
+}
+
+.timeline li::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 26px;
+  bottom: -8px;
+  width: 2px;
+  background: rgba(147, 197, 253, 0.25);
+}
+
+.timeline li:last-child::after {
+  display: none;
+}
+
 .gallery {
-  margin-top: 14px;
+  margin-top: 18px;
 }
 
 .gallery-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 10px;
+  gap: 12px;
 }
 
 .gallery-item {
   margin: 0;
   border: 1px solid rgba(147, 197, 253, 0.3);
-  border-radius: 10px;
+  border-radius: 12px;
   overflow: hidden;
   background: rgba(7, 15, 30, 0.55);
 }
@@ -248,7 +334,7 @@ function clearStickers() {
 }
 
 .gallery-item:hover img {
-  transform: scale(1.03);
+  transform: scale(1.045);
 }
 
 .customizer {
@@ -290,6 +376,7 @@ function clearStickers() {
 }
 
 @media (max-width: 900px) {
+  .hero-metrics,
   .content-grid,
   .gallery-grid,
   .customizer-controls {

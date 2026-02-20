@@ -681,20 +681,25 @@ function handleAnimationEnd(event: AnimationEvent) {
     <SLCard class="desktop-showcase-card">
       <div class="desktop-showcase-water" />
       <div class="desktop-showcase-header">
-        <h3>Sea Lantern 视觉体验升级</h3>
-        <p class="text-caption">桌面版也加入了动态水感氛围、介绍内容与上手教程。</p>
+        <h3 class="desktop-showcase-title">Sea Lantern 视觉体验升级</h3>
+        <p class="desktop-showcase-subtitle">桌面版也加入了动态水感氛围、介绍内容与上手教程。</p>
+        <div class="desktop-showcase-badges">
+          <span>稳定运行</span>
+          <span>高效管理</span>
+          <span>可视化体验</span>
+        </div>
       </div>
 
       <div class="desktop-showcase-grid">
         <section class="desktop-showcase-block">
-          <h4>快速教程</h4>
+          <h4>🚀 快速教程</h4>
           <ul>
             <li v-for="step in desktopGuideSteps" :key="step">{{ step }}</li>
           </ul>
         </section>
 
         <section class="desktop-showcase-block">
-          <h4>核心功能</h4>
+          <h4>✨ 核心功能</h4>
           <ul>
             <li>服务器创建 / 启停 / 多实例管理</li>
             <li>控制台实时日志 + 命令下发</li>
@@ -1472,17 +1477,28 @@ function handleAnimationEnd(event: AnimationEvent) {
 .desktop-showcase-card {
   position: relative;
   overflow: hidden;
-  border: 1px solid rgba(147, 197, 253, 0.35);
-  box-shadow: 0 14px 44px rgba(2, 6, 23, 0.2);
+  border: 1px solid rgba(147, 197, 253, 0.42);
+  box-shadow: 0 20px 56px rgba(2, 6, 23, 0.26);
+  background: linear-gradient(160deg, rgba(9, 19, 34, 0.84), rgba(8, 17, 31, 0.62));
+}
+
+.desktop-showcase-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 28%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .desktop-showcase-water {
   position: absolute;
-  inset: -30%;
+  inset: -35%;
   z-index: 0;
-  background: radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.25), transparent 35%),
-    radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.2), transparent 40%);
-  animation: desktopWater 14s linear infinite;
+  background: radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.3), transparent 36%),
+    radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.24), transparent 42%);
+  filter: saturate(1.12);
+  animation: desktopWater 12s linear infinite;
 }
 
 @keyframes desktopWater {
@@ -1498,6 +1514,33 @@ function handleAnimationEnd(event: AnimationEvent) {
   z-index: 1;
 }
 
+.desktop-showcase-title {
+  margin: 0;
+  font-size: clamp(22px, 2.2vw, 30px);
+  letter-spacing: 0.2px;
+}
+
+.desktop-showcase-subtitle {
+  margin: 8px 0 0;
+  color: var(--sl-text-secondary);
+}
+
+.desktop-showcase-badges {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.desktop-showcase-badges span {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  background: rgba(9, 28, 50, 0.45);
+  color: var(--sl-text-secondary);
+}
+
 .desktop-showcase-grid {
   margin-top: 10px;
   display: grid;
@@ -1506,10 +1549,10 @@ function handleAnimationEnd(event: AnimationEvent) {
 }
 
 .desktop-showcase-block {
-  border: 1px solid var(--sl-border);
-  border-radius: 12px;
-  padding: 12px;
-  background: linear-gradient(180deg, rgba(10, 18, 30, 0.55), rgba(10, 18, 30, 0.3));
+  border: 1px solid rgba(147, 197, 253, 0.24);
+  border-radius: 14px;
+  padding: 14px;
+  background: linear-gradient(180deg, rgba(12, 30, 53, 0.62), rgba(8, 17, 30, 0.4));
 }
 
 .desktop-showcase-block h4 {
@@ -1530,9 +1573,19 @@ function handleAnimationEnd(event: AnimationEvent) {
 }
 
 .photo-item {
-  border: 1px solid var(--sl-border);
-  border-radius: 10px;
+  border: 1px solid rgba(147, 197, 253, 0.32);
+  border-radius: 12px;
   overflow: hidden;
+  background: rgba(9, 20, 36, 0.5);
+  position: relative;
+}
+
+.photo-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 36%);
+  pointer-events: none;
 }
 
 .photo-item img {
@@ -1544,7 +1597,7 @@ function handleAnimationEnd(event: AnimationEvent) {
 }
 
 .photo-item:hover img {
-  transform: scale(1.03);
+  transform: scale(1.04);
 }
 
 @media (max-width: 900px) {
