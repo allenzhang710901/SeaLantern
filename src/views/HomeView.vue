@@ -35,6 +35,18 @@ const statsLoading = ref(true); // 视图模式
 let statsTimer: ReturnType<typeof setInterval> | null = null;
 let refreshTimer: ReturnType<typeof setInterval> | null = null;
 
+const desktopGuideSteps = [
+  "1. 点击“创建服务器”，导入核心并选择 Java。",
+  "2. 在首页卡片快速启动，再进入控制台查看实时日志。",
+  "3. 用“配置编辑 / 玩家管理 / 模组下载”完成日常维护。",
+];
+
+const desktopShowcasePhotos = [
+  "/screenshots/intro-1.svg",
+  "/screenshots/intro-2.svg",
+  "/screenshots/intro-3.svg",
+];
+
 // 一言 API 相关
 interface HitokotoResponse {
   id: number;
@@ -664,6 +676,52 @@ function handleAnimationEnd(event: AnimationEvent) {
         </div>
       </SLCard>
     </div>
+
+
+    <SLCard class="desktop-showcase-card">
+      <div class="desktop-showcase-water" />
+      <div class="desktop-showcase-header">
+        <h3 class="desktop-showcase-title">Sea Lantern 视觉体验升级</h3>
+        <p class="desktop-showcase-subtitle">桌面版也加入了动态水感氛围、介绍内容与上手教程。</p>
+        <div class="desktop-showcase-badges">
+          <span>稳定运行</span>
+          <span>高效管理</span>
+          <span>可视化体验</span>
+        </div>
+      </div>
+
+      <div class="desktop-showcase-grid">
+        <section class="desktop-showcase-block">
+          <h4>🚀 快速教程</h4>
+          <ul>
+            <li v-for="step in desktopGuideSteps" :key="step">{{ step }}</li>
+          </ul>
+        </section>
+
+        <section class="desktop-showcase-block">
+          <h4>✨ 核心功能</h4>
+          <ul>
+            <li>服务器创建 / 启停 / 多实例管理</li>
+            <li>控制台实时日志 + 命令下发</li>
+            <li>配置编辑、玩家管理、模组/插件下载</li>
+            <li>个性化主题、背景、语言切换</li>
+          </ul>
+        </section>
+      </div>
+
+
+      <div class="desktop-showcase-stats">
+        <div><strong>可视化</strong><span>日志与资源面板一屏掌控</span></div>
+        <div><strong>易维护</strong><span>配置、玩家、模组管理集中化</span></div>
+        <div><strong>可扩展</strong><span>支持多实例与插件生态演进</span></div>
+      </div>
+
+      <div class="desktop-showcase-photos">
+        <div v-for="photo in desktopShowcasePhotos" :key="photo" class="photo-item">
+          <img :src="photo" alt="Sea Lantern screenshot" loading="lazy" />
+        </div>
+      </div>
+    </SLCard>
 
     <!-- Server List -->
     <div class="section-header">
@@ -1422,8 +1480,168 @@ function handleAnimationEnd(event: AnimationEvent) {
   color: var(--sl-text-tertiary);
 }
 
+
+.desktop-showcase-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(147, 197, 253, 0.42);
+  box-shadow: 0 20px 56px rgba(2, 6, 23, 0.26);
+  background: linear-gradient(160deg, rgba(9, 19, 34, 0.84), rgba(8, 17, 31, 0.62));
+}
+
+.desktop-showcase-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 28%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.desktop-showcase-water {
+  position: absolute;
+  inset: -35%;
+  z-index: 0;
+  background: radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.3), transparent 36%),
+    radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.24), transparent 42%);
+  filter: saturate(1.12);
+  animation: desktopWater 12s linear infinite;
+}
+
+@keyframes desktopWater {
+  0% { transform: translate3d(-2%, -2%, 0) rotate(0deg); }
+  50% { transform: translate3d(2%, 2%, 0) rotate(180deg); }
+  100% { transform: translate3d(-2%, -2%, 0) rotate(360deg); }
+}
+
+.desktop-showcase-header,
+.desktop-showcase-grid,
+.desktop-showcase-photos {
+  position: relative;
+  z-index: 1;
+}
+
+.desktop-showcase-title {
+  margin: 0;
+  font-size: clamp(22px, 2.2vw, 30px);
+  letter-spacing: 0.2px;
+}
+
+.desktop-showcase-subtitle {
+  margin: 8px 0 0;
+  color: var(--sl-text-secondary);
+}
+
+.desktop-showcase-badges {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.desktop-showcase-badges span {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  background: rgba(9, 28, 50, 0.45);
+  color: var(--sl-text-secondary);
+}
+
+.desktop-showcase-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.desktop-showcase-block {
+  border: 1px solid rgba(147, 197, 253, 0.24);
+  border-radius: 14px;
+  padding: 14px;
+  background: linear-gradient(180deg, rgba(12, 30, 53, 0.62), rgba(8, 17, 30, 0.4));
+}
+
+.desktop-showcase-block h4 {
+  margin: 0 0 8px;
+}
+
+.desktop-showcase-block ul {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.8;
+}
+
+
+.desktop-showcase-stats {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.desktop-showcase-stats > div {
+  border: 1px solid rgba(147, 197, 253, 0.26);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: rgba(10, 25, 43, 0.48);
+}
+
+.desktop-showcase-stats strong {
+  display: block;
+  font-size: 14px;
+}
+
+.desktop-showcase-stats span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--sl-text-secondary);
+}
+
+.desktop-showcase-photos {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.photo-item {
+  border: 1px solid rgba(147, 197, 253, 0.32);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(9, 20, 36, 0.5);
+  position: relative;
+}
+
+.photo-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 36%);
+  pointer-events: none;
+}
+
+.photo-item img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.photo-item:hover img {
+  transform: scale(1.04);
+}
+
 @media (max-width: 900px) {
   .top-row {
+    grid-template-columns: 1fr;
+  }
+
+  .desktop-showcase-grid,
+  .desktop-showcase-stats,
+  .desktop-showcase-photos {
     grid-template-columns: 1fr;
   }
 }
