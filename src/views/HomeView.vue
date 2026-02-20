@@ -42,9 +42,9 @@ const desktopGuideSteps = [
 ];
 
 const desktopShowcasePhotos = [
-  "https://gitee.com/fps_z/markdown/raw/master/img/about2.png",
-  "https://gitee.com/fps_z/markdown/raw/master/img/about3.png",
-  "https://gitee.com/fps_z/markdown/raw/master/img/about4.png",
+  "/screenshots/intro-1.svg",
+  "/screenshots/intro-2.svg",
+  "/screenshots/intro-3.svg",
 ];
 
 // 一言 API 相关
@@ -1472,6 +1472,8 @@ function handleAnimationEnd(event: AnimationEvent) {
 .desktop-showcase-card {
   position: relative;
   overflow: hidden;
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  box-shadow: 0 14px 44px rgba(2, 6, 23, 0.2);
 }
 
 .desktop-showcase-water {
@@ -1507,7 +1509,7 @@ function handleAnimationEnd(event: AnimationEvent) {
   border: 1px solid var(--sl-border);
   border-radius: 12px;
   padding: 12px;
-  background: rgba(10, 18, 30, 0.35);
+  background: linear-gradient(180deg, rgba(10, 18, 30, 0.55), rgba(10, 18, 30, 0.3));
 }
 
 .desktop-showcase-block h4 {
@@ -1538,6 +1540,11 @@ function handleAnimationEnd(event: AnimationEvent) {
   height: 140px;
   object-fit: cover;
   display: block;
+  transition: transform 0.35s ease;
+}
+
+.photo-item:hover img {
+  transform: scale(1.03);
 }
 
 @media (max-width: 900px) {

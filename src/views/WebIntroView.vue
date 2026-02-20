@@ -14,10 +14,10 @@ const tutorialSteps = [
 ];
 
 const screenshots = [
-  "https://gitee.com/fps_z/markdown/raw/master/img/about2.png",
-  "https://gitee.com/fps_z/markdown/raw/master/img/about3.png",
-  "https://gitee.com/fps_z/markdown/raw/master/img/about4.png",
-  "https://gitee.com/fps_z/markdown/raw/master/img/about5.png",
+  "/screenshots/intro-1.svg",
+  "/screenshots/intro-2.svg",
+  "/screenshots/intro-3.svg",
+  "/screenshots/intro-4.svg",
 ];
 
 type Ripple = { id: number; x: number; y: number };
@@ -151,11 +151,12 @@ function clearStickers() {
   position: relative;
   width: min(1100px, 94vw);
   margin: 0 auto;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(147, 197, 253, 0.35);
   border-radius: 20px;
   padding: 28px;
   overflow: hidden;
   backdrop-filter: blur(8px);
+  box-shadow: 0 24px 80px rgba(2, 6, 23, 0.45);
 }
 
 .water-bg {
@@ -175,6 +176,10 @@ function clearStickers() {
 }
 
 .hero-header h1 { margin: 0; }
+.hero-header h1 {
+  font-size: clamp(32px, 4vw, 52px);
+  letter-spacing: 0.5px;
+}
 .subtitle { margin: 8px 0 0; opacity: 0.92; }
 .desc { margin-top: 10px; color: #c4d8f2; }
 .meta { margin-top: 8px; }
@@ -197,10 +202,10 @@ function clearStickers() {
 }
 
 .panel {
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(147, 197, 253, 0.28);
   border-radius: 12px;
   padding: 14px;
-  background: rgba(9, 16, 28, 0.35);
+  background: linear-gradient(180deg, rgba(10, 21, 38, 0.72), rgba(9, 16, 28, 0.45));
 }
 
 .panel h3,
@@ -228,9 +233,10 @@ function clearStickers() {
 
 .gallery-item {
   margin: 0;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(147, 197, 253, 0.3);
   border-radius: 10px;
   overflow: hidden;
+  background: rgba(7, 15, 30, 0.55);
 }
 
 .gallery-item img {
@@ -238,6 +244,11 @@ function clearStickers() {
   height: 150px;
   object-fit: cover;
   display: block;
+  transition: transform 0.35s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.03);
 }
 
 .customizer {
