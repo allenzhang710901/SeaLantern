@@ -35,6 +35,18 @@ const statsLoading = ref(true); // 视图模式
 let statsTimer: ReturnType<typeof setInterval> | null = null;
 let refreshTimer: ReturnType<typeof setInterval> | null = null;
 
+const desktopGuideSteps = [
+  "1. 点击“创建服务器”，导入核心并选择 Java。",
+  "2. 在首页卡片快速启动，再进入控制台查看实时日志。",
+  "3. 用“配置编辑 / 玩家管理 / 模组下载”完成日常维护。",
+];
+
+const desktopShowcasePhotos = [
+  "/screenshots/intro-1.svg",
+  "/screenshots/intro-2.svg",
+  "/screenshots/intro-3.svg",
+];
+
 // 一言 API 相关
 interface HitokotoResponse {
   id: number;
@@ -665,6 +677,57 @@ function handleAnimationEnd(event: AnimationEvent) {
       </SLCard>
     </div>
 
+
+    <SLCard class="desktop-showcase-card">
+      <div class="desktop-showcase-water" />
+      <div class="desktop-showcase-header">
+        <h3 class="desktop-showcase-title">Sea Lantern · 桌面控制中心</h3>
+        <p class="desktop-showcase-subtitle">把核心管理能力聚合到一个页面，减少切换、提升运维效率。</p>
+        <div class="desktop-showcase-badges">
+          <span>稳定运行</span>
+          <span>高效管理</span>
+          <span>数据可视化</span>
+        </div>
+      </div>
+
+      <div class="desktop-showcase-grid">
+        <section class="desktop-showcase-block">
+          <h4>快速上手</h4>
+          <ul>
+            <li v-for="step in desktopGuideSteps" :key="step">{{ step }}</li>
+          </ul>
+        </section>
+
+        <section class="desktop-showcase-block">
+          <h4>核心能力</h4>
+          <ul>
+            <li>服务器创建 / 启停 / 多实例管理</li>
+            <li>控制台实时日志 + 命令下发</li>
+            <li>配置编辑、玩家管理、模组/插件下载</li>
+            <li>个性化主题、背景、语言切换</li>
+          </ul>
+        </section>
+      </div>
+
+
+      <div class="desktop-showcase-stats">
+        <div><strong>可视化</strong><span>日志与资源面板一屏掌控</span></div>
+        <div><strong>易维护</strong><span>配置、玩家、模组管理集中化</span></div>
+        <div><strong>可扩展</strong><span>支持多实例与插件生态演进</span></div>
+      </div>
+
+      <div class="desktop-showcase-cta">
+        <a href="https://github.com/FPSZ/SeaLantern/releases" target="_blank" rel="noreferrer">下载最新版</a>
+        <a href="https://github.com/FPSZ/SeaLantern#readme" target="_blank" rel="noreferrer">查看使用文档</a>
+      </div>
+
+      <div class="desktop-showcase-photos">
+        <div v-for="photo in desktopShowcasePhotos" :key="photo" class="photo-item">
+          <img :src="photo" alt="Sea Lantern screenshot" loading="lazy" />
+        </div>
+      </div>
+    </SLCard>
+
     <!-- Server List -->
     <div class="section-header">
       <h3 class="section-title">
@@ -922,7 +985,7 @@ function handleAnimationEnd(event: AnimationEvent) {
 
 .stat-label {
   font-size: 0.8125rem;
-  color: var(--sl-text-secondary);
+  color: #cbd5e1;
   font-weight: 500;
 }
 .stat-value {
@@ -1107,7 +1170,7 @@ function handleAnimationEnd(event: AnimationEvent) {
 
 .inline-edit-btn.cancel {
   background: var(--sl-bg-secondary);
-  color: var(--sl-text-secondary);
+  color: #cbd5e1;
   border-color: var(--sl-border);
 }
 
@@ -1311,7 +1374,7 @@ function handleAnimationEnd(event: AnimationEvent) {
   background: transparent;
   border: 1px solid var(--sl-border);
   border-radius: var(--sl-radius-sm);
-  color: var(--sl-text-secondary);
+  color: #cbd5e1;
   cursor: pointer;
   transition: all 0.15s;
 }
@@ -1394,7 +1457,7 @@ function handleAnimationEnd(event: AnimationEvent) {
 .detail-value {
   font-size: 0.75rem;
   font-family: var(--sl-font-mono);
-  color: var(--sl-text-secondary);
+  color: #cbd5e1;
 }
 
 .quote-display {
@@ -1413,7 +1476,7 @@ function handleAnimationEnd(event: AnimationEvent) {
 }
 .quote-text {
   font-size: 0.8125rem;
-  color: var(--sl-text-secondary);
+  color: #cbd5e1;
   font-style: italic;
   text-align: center;
 }
@@ -1422,8 +1485,185 @@ function handleAnimationEnd(event: AnimationEvent) {
   color: var(--sl-text-tertiary);
 }
 
+
+.desktop-showcase-card {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(147, 197, 253, 0.42);
+  box-shadow: 0 22px 60px rgba(2, 6, 23, 0.28);
+  background: linear-gradient(160deg, rgba(10, 22, 39, 0.9), rgba(8, 17, 31, 0.68));
+}
+
+.desktop-showcase-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 28%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.desktop-showcase-water {
+  position: absolute;
+  inset: -35%;
+  z-index: 0;
+  background: radial-gradient(circle at 20% 30%, rgba(56, 189, 248, 0.3), transparent 36%),
+    radial-gradient(circle at 80% 70%, rgba(16, 185, 129, 0.24), transparent 42%);
+  filter: saturate(1.12);
+  animation: desktopWater 12s linear infinite;
+}
+
+@keyframes desktopWater {
+  0% { transform: translate3d(-2%, -2%, 0) rotate(0deg); }
+  50% { transform: translate3d(2%, 2%, 0) rotate(180deg); }
+  100% { transform: translate3d(-2%, -2%, 0) rotate(360deg); }
+}
+
+.desktop-showcase-header,
+.desktop-showcase-grid,
+.desktop-showcase-photos {
+  position: relative;
+  z-index: 1;
+}
+
+.desktop-showcase-title {
+  margin: 0;
+  font-size: clamp(24px, 2.4vw, 32px);
+  letter-spacing: 0.2px;
+}
+
+.desktop-showcase-subtitle {
+  margin: 8px 0 0;
+  color: #cbd5e1;
+}
+
+.desktop-showcase-badges {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.desktop-showcase-badges span {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  background: rgba(9, 28, 50, 0.55);
+  color: #cbd5e1;
+}
+
+.desktop-showcase-grid {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.desktop-showcase-block {
+  border: 1px solid rgba(147, 197, 253, 0.24);
+  border-radius: 14px;
+  padding: 14px;
+  background: linear-gradient(180deg, rgba(14, 35, 60, 0.7), rgba(8, 17, 30, 0.46));
+}
+
+.desktop-showcase-block h4 {
+  margin: 0 0 8px;
+}
+
+.desktop-showcase-block ul {
+  margin: 0;
+  padding-left: 18px;
+  line-height: 1.8;
+}
+
+
+.desktop-showcase-stats {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.desktop-showcase-stats > div {
+  border: 1px solid rgba(147, 197, 253, 0.26);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: rgba(10, 25, 43, 0.58);
+}
+
+.desktop-showcase-stats strong {
+  display: block;
+  font-size: 14px;
+}
+
+.desktop-showcase-stats span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: #cbd5e1;
+}
+
+.desktop-showcase-cta {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.desktop-showcase-cta a {
+  text-decoration: none;
+  font-size: 13px;
+  color: var(--sl-text-primary);
+  border: 1px solid rgba(147, 197, 253, 0.34);
+  background: rgba(14, 38, 66, 0.64);
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+
+.desktop-showcase-photos {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.photo-item {
+  border: 1px solid rgba(147, 197, 253, 0.32);
+  border-radius: 12px;
+  overflow: hidden;
+  background: rgba(9, 20, 36, 0.5);
+  position: relative;
+}
+
+.photo-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 36%);
+  pointer-events: none;
+}
+
+.photo-item img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.35s ease;
+}
+
+.photo-item:hover img {
+  transform: scale(1.04);
+}
+
 @media (max-width: 900px) {
   .top-row {
+    grid-template-columns: 1fr;
+  }
+
+  .desktop-showcase-grid,
+  .desktop-showcase-stats,
+  .desktop-showcase-photos {
     grid-template-columns: 1fr;
   }
 }
