@@ -87,8 +87,15 @@ function clearStickers() {
         <a class="btn" href="https://github.com/FPSZ/SeaLantern" target="_blank" rel="noreferrer">查看源码</a>
       </div>
 
+      <nav class="section-nav" aria-label="page sections">
+        <a href="#features">功能</a>
+        <a href="#tutorial">教程</a>
+        <a href="#gallery">照片</a>
+        <a href="#customizer">自定义</a>
+      </nav>
+
       <section class="content-grid">
-        <article class="panel">
+        <article id="features" class="panel">
           <h3>✨ 功能介绍</h3>
           <ul>
             <li>服务器创建、导入、启停与状态监控</li>
@@ -98,7 +105,7 @@ function clearStickers() {
           </ul>
         </article>
 
-        <article class="panel">
+        <article id="tutorial" class="panel">
           <h3>🚀 快速教程</h3>
           <ol class="timeline">
             <li v-for="step in tutorialSteps" :key="step">{{ step }}</li>
@@ -121,7 +128,7 @@ function clearStickers() {
         </article>
       </section>
 
-      <section class="gallery">
+      <section id="gallery" class="gallery">
         <h3>🖼️ 界面照片</h3>
         <div class="gallery-grid">
           <figure v-for="shot in screenshots" :key="shot" class="gallery-item">
@@ -130,7 +137,7 @@ function clearStickers() {
         </div>
       </section>
 
-      <section class="customizer">
+      <section id="customizer" class="customizer">
         <h3>🎨 外观自定义</h3>
         <div class="customizer-controls">
           <label>渐变色 A <input v-model="gradientA" type="color" /></label>
@@ -251,6 +258,22 @@ function clearStickers() {
 }
 
 .actions { margin: 20px 0; display: flex; gap: 12px; flex-wrap: wrap; }
+.section-nav {
+  margin-bottom: 16px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.section-nav a {
+  font-size: 12px;
+  text-decoration: none;
+  color: #dbeafe;
+  border: 1px solid rgba(147, 197, 253, 0.34);
+  border-radius: 999px;
+  padding: 5px 10px;
+  background: rgba(30, 58, 95, 0.3);
+}
 .btn {
   border: 1px solid rgba(255, 255, 255, 0.35);
   border-radius: 12px;
@@ -424,6 +447,19 @@ function clearStickers() {
   .gallery-grid,
   .customizer-controls {
     grid-template-columns: 1fr;
+  }
+
+  .section-nav {
+    gap: 8px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .water-bg,
+  .ripple,
+  .gallery-item img {
+    animation: none !important;
+    transition: none !important;
   }
 }
 </style>

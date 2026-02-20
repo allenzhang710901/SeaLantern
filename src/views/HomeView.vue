@@ -716,6 +716,11 @@ function handleAnimationEnd(event: AnimationEvent) {
         <div><strong>可扩展</strong><span>支持多实例与插件生态演进</span></div>
       </div>
 
+      <div class="desktop-showcase-cta">
+        <a href="https://github.com/FPSZ/SeaLantern/releases" target="_blank" rel="noreferrer">下载最新版</a>
+        <a href="https://github.com/FPSZ/SeaLantern#readme" target="_blank" rel="noreferrer">查看使用文档</a>
+      </div>
+
       <div class="desktop-showcase-photos">
         <div v-for="photo in desktopShowcasePhotos" :key="photo" class="photo-item">
           <img :src="photo" alt="Sea Lantern screenshot" loading="lazy" />
@@ -1597,6 +1602,23 @@ function handleAnimationEnd(event: AnimationEvent) {
   margin-top: 4px;
   font-size: 12px;
   color: var(--sl-text-secondary);
+}
+
+.desktop-showcase-cta {
+  margin-top: 12px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.desktop-showcase-cta a {
+  text-decoration: none;
+  font-size: 13px;
+  color: var(--sl-text-primary);
+  border: 1px solid rgba(147, 197, 253, 0.34);
+  background: rgba(10, 25, 43, 0.56);
+  border-radius: 10px;
+  padding: 8px 12px;
 }
 
 .desktop-showcase-photos {
