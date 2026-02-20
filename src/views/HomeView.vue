@@ -683,6 +683,11 @@ function handleAnimationEnd(event: AnimationEvent) {
       <div class="desktop-showcase-header">
         <h3 class="desktop-showcase-title">Sea Lantern 视觉体验升级</h3>
         <p class="desktop-showcase-subtitle">桌面版也加入了动态水感氛围、介绍内容与上手教程。</p>
+        <div class="desktop-showcase-badges">
+          <span>稳定运行</span>
+          <span>高效管理</span>
+          <span>可视化体验</span>
+        </div>
       </div>
 
       <div class="desktop-showcase-grid">
@@ -1520,6 +1525,22 @@ function handleAnimationEnd(event: AnimationEvent) {
   color: var(--sl-text-secondary);
 }
 
+.desktop-showcase-badges {
+  margin-top: 12px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.desktop-showcase-badges span {
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  background: rgba(9, 28, 50, 0.45);
+  color: var(--sl-text-secondary);
+}
+
 .desktop-showcase-grid {
   margin-top: 10px;
   display: grid;
@@ -1556,6 +1577,15 @@ function handleAnimationEnd(event: AnimationEvent) {
   border-radius: 12px;
   overflow: hidden;
   background: rgba(9, 20, 36, 0.5);
+  position: relative;
+}
+
+.photo-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.14), transparent 36%);
+  pointer-events: none;
 }
 
 .photo-item img {

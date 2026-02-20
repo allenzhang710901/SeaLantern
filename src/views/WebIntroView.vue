@@ -71,6 +71,11 @@ function clearStickers() {
         <h1 class="hero-title">Sea Lantern</h1>
         <p class="subtitle">更现代、更流畅的 Minecraft 服务器管理体验</p>
         <div class="hero-tags"><span>桌面应用</span><span>Web 预览</span><span>开源项目</span></div>
+        <div class="hero-metrics">
+          <div class="metric"><strong>10+</strong><span>核心功能模块</span></div>
+          <div class="metric"><strong>3</strong><span>分钟快速上手</span></div>
+          <div class="metric"><strong>100%</strong><span>本地自主管理</span></div>
+        </div>
         <p class="desc">
           Web 版当前以介绍与预览为主；完整能力（本地文件、进程管理、系统托盘等）请下载桌面端。
         </p>
@@ -95,7 +100,7 @@ function clearStickers() {
 
         <article class="panel">
           <h3>🚀 快速教程</h3>
-          <ol>
+          <ol class="timeline">
             <li v-for="step in tutorialSteps" :key="step">{{ step }}</li>
           </ol>
         </article>
@@ -203,6 +208,33 @@ function clearStickers() {
 .desc { margin-top: 10px; color: #c4d8f2; }
 .meta { margin-top: 8px; }
 
+.hero-metrics {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.metric {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 10px;
+  border-radius: 12px;
+  border: 1px solid rgba(147, 197, 253, 0.35);
+  background: rgba(11, 27, 47, 0.45);
+}
+
+.metric strong {
+  font-size: 20px;
+  line-height: 1.2;
+}
+
+.metric span {
+  font-size: 12px;
+  color: #bfdbfe;
+}
+
 .actions { margin: 20px 0; display: flex; gap: 12px; flex-wrap: wrap; }
 .btn {
   border: 1px solid rgba(255, 255, 255, 0.35);
@@ -238,6 +270,41 @@ function clearStickers() {
   margin: 0;
   padding-left: 18px;
   line-height: 1.8;
+}
+
+.timeline {
+  list-style: none;
+  padding-left: 0 !important;
+}
+
+.timeline li {
+  position: relative;
+  padding: 8px 0 8px 20px;
+}
+
+.timeline li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 16px;
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #34d399, #38bdf8);
+}
+
+.timeline li::after {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 26px;
+  bottom: -8px;
+  width: 2px;
+  background: rgba(147, 197, 253, 0.25);
+}
+
+.timeline li:last-child::after {
+  display: none;
 }
 
 .gallery {
@@ -309,6 +376,7 @@ function clearStickers() {
 }
 
 @media (max-width: 900px) {
+  .hero-metrics,
   .content-grid,
   .gallery-grid,
   .customizer-controls {
