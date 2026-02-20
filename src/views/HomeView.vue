@@ -709,6 +709,13 @@ function handleAnimationEnd(event: AnimationEvent) {
         </section>
       </div>
 
+
+      <div class="desktop-showcase-stats">
+        <div><strong>可视化</strong><span>日志与资源面板一屏掌控</span></div>
+        <div><strong>易维护</strong><span>配置、玩家、模组管理集中化</span></div>
+        <div><strong>可扩展</strong><span>支持多实例与插件生态演进</span></div>
+      </div>
+
       <div class="desktop-showcase-photos">
         <div v-for="photo in desktopShowcasePhotos" :key="photo" class="photo-item">
           <img :src="photo" alt="Sea Lantern screenshot" loading="lazy" />
@@ -1565,6 +1572,33 @@ function handleAnimationEnd(event: AnimationEvent) {
   line-height: 1.8;
 }
 
+
+.desktop-showcase-stats {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.desktop-showcase-stats > div {
+  border: 1px solid rgba(147, 197, 253, 0.26);
+  border-radius: 12px;
+  padding: 10px 12px;
+  background: rgba(10, 25, 43, 0.48);
+}
+
+.desktop-showcase-stats strong {
+  display: block;
+  font-size: 14px;
+}
+
+.desktop-showcase-stats span {
+  display: block;
+  margin-top: 4px;
+  font-size: 12px;
+  color: var(--sl-text-secondary);
+}
+
 .desktop-showcase-photos {
   margin-top: 12px;
   display: grid;
@@ -1606,6 +1640,7 @@ function handleAnimationEnd(event: AnimationEvent) {
   }
 
   .desktop-showcase-grid,
+  .desktop-showcase-stats,
   .desktop-showcase-photos {
     grid-template-columns: 1fr;
   }

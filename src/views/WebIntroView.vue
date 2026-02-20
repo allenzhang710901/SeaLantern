@@ -106,6 +106,21 @@ function clearStickers() {
         </article>
       </section>
 
+      <section class="value-strip">
+        <article class="value-card">
+          <h4>⚡ 启动快</h4>
+          <p>预设工作流把创建、导入、启动步骤合并，减少重复配置。</p>
+        </article>
+        <article class="value-card">
+          <h4>🛡️ 管理稳</h4>
+          <p>本地化运行与日志监控结合，关键操作可追踪、可回溯。</p>
+        </article>
+        <article class="value-card">
+          <h4>🎯 成本低</h4>
+          <p>开源免费，适合个人服与小团队长期维护与迭代。</p>
+        </article>
+      </section>
+
       <section class="gallery">
         <h3>🖼️ 界面照片</h3>
         <div class="gallery-grid">
@@ -307,6 +322,33 @@ function clearStickers() {
   display: none;
 }
 
+
+.value-strip {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.value-card {
+  border: 1px solid rgba(147, 197, 253, 0.26);
+  border-radius: 14px;
+  padding: 14px;
+  background: linear-gradient(180deg, rgba(13, 31, 55, 0.62), rgba(8, 16, 29, 0.4));
+}
+
+.value-card h4 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.value-card p {
+  margin: 8px 0 0;
+  color: #bfdbfe;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
 .gallery {
   margin-top: 18px;
 }
@@ -378,6 +420,7 @@ function clearStickers() {
 @media (max-width: 900px) {
   .hero-metrics,
   .content-grid,
+  .value-strip,
   .gallery-grid,
   .customizer-controls {
     grid-template-columns: 1fr;
